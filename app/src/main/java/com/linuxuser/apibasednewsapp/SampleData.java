@@ -1,11 +1,11 @@
 package com.linuxuser.apibasednewsapp;
 
 public class SampleData {
-    private String author,headline,content,publishedAt="",url,urlToImage;
+    private String author,title,content,publishedAt="",url,urlToImage;
 
     public SampleData(String author, String headline, String content, String publishedat, String url, String urlOfImage) {
         this.author = author;
-        this.headline = headline;
+        this.title = headline;
         this.content = content;
         this.publishedAt = publishedat;
         this.url = url;
@@ -21,11 +21,11 @@ public class SampleData {
     }
 
     public String getHeadline() {
-        return headline;
+        return title;
     }
 
     public void setHeadline(String headline) {
-        this.headline = headline;
+        this.title = headline;
     }
 
     public String getContent() {
