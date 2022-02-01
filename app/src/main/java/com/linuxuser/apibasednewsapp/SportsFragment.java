@@ -10,6 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SportsFragment#newInstance} factory method to
@@ -48,15 +54,9 @@ public class SportsFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-    SampleData item=new SampleData("MSTC DA-IICT","Linux Operating System Users Are Born Developers Because They Know Value of Terminal and Command Line","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor enim ut lorem semper tempor. Nulla vitae aliquet mi. Donec at urna vel sapien rutrum posuere. Praesent et tortor sed lacus venenatis ultrices. Phasellus a elementum lectus.","Published AT "+"21-01-2022 12:30");
+    String apikey="f3704f2408b54fafbca5f1dce20f0cb7";
+    ArrayList<SampleData> newslist;
+    String country="in",category="sports";
     AdapterRecyclerView adapter;
     private RecyclerView recyclerViewofsports;
     @Override
@@ -65,10 +65,29 @@ public class SportsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_sports, null);
         recyclerViewofsports=v.findViewById(R.id.sportsrecyclerview);
+        newslist=new ArrayList<>();
         recyclerViewofsports.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AdapterRecyclerView(getContext(),item);
+        adapter=new AdapterRecyclerView(getContext(),newslist);
         recyclerViewofsports.setAdapter(adapter);
+        findNews();
         adapter.notifyDataSetChanged();
         return v;
+    }
+    private void findNews(){
+        BackendOfApplication.getApiInterface().getCategoryNews(country,category,30,apikey).enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                if(response.isSuccessful()) {
+                    newslist.addAll(response.body().getArticles());
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

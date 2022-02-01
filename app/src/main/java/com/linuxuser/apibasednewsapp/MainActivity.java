@@ -11,6 +11,8 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    String apikey="f3704f2408b54fafbca5f1dce20f0cb7";
+
     Toolbar topbar;
     TabLayout tabLayout;
     TabItem thome,tsports,thealth,tscience,tentertainment,ttechnology;

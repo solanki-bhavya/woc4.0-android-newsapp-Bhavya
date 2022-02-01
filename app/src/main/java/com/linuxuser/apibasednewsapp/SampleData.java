@@ -1,13 +1,15 @@
 package com.linuxuser.apibasednewsapp;
 
 public class SampleData {
-    private String author,headline,content,publishedat;
+    private String author,headline,content,publishedAt="",url,urlToImage;
 
-    public SampleData(String author, String headline, String content, String publishedat) {
+    public SampleData(String author, String headline, String content, String publishedat, String url, String urlOfImage) {
         this.author = author;
         this.headline = headline;
         this.content = content;
-        this.publishedat = publishedat;
+        this.publishedAt = publishedat;
+        this.url = url;
+        this.urlToImage = urlOfImage;
     }
 
     public String getAuthor() {
@@ -35,10 +37,26 @@ public class SampleData {
     }
 
     public String getPublishedat() {
-        return publishedat;
+        return publishedAt;
     }
 
     public void setPublishedat(String publishedat) {
-        this.publishedat = publishedat;
+        this.publishedAt = publishedat;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrlOfImage() {
+        return urlToImage;
+    }
+
+    public void setUrlOfImage(String urlOfImage) {
+        this.urlToImage = urlOfImage;
     }
 }

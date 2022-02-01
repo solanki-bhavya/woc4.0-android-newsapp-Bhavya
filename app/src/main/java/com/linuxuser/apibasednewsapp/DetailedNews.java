@@ -19,7 +19,8 @@ public class DetailedNews extends AppCompatActivity {
         webView=findViewById(R.id.webview);
         setSupportActionBar(topbar1);
         Intent intent=getIntent();
+        String url=intent.getStringExtra("url");
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.omgubuntu.co.uk/");
+        webView.loadUrl(url);
     }
 }
